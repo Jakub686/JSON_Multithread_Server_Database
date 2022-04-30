@@ -13,23 +13,42 @@ public class Controller {
         do {
             String input = sc.nextLine();
             String[] inputSplit = input.split(" ");
+
             if (inputSplit[0].equals("get")) {
-                if (model.getList(Integer.parseInt(inputSplit[1]))==null) {
-                    view.showError();
-                } else {
+                if(inputSplit[0].equals("get"))
+                try {
                     view.show(model.getList(Integer.parseInt(inputSplit[1])));
+
+                } catch (Exception e) {
+                    view.showError();
                 }
             }
             if (inputSplit[0].equals("set")) {
-                model.setList(Integer.parseInt(inputSplit[1]), inputSplit[2]);
+                try {
+                    model.setList(Integer.parseInt(inputSplit[1]), text(inputSplit));
+                } catch (Exception e) {
+                    view.showError();
+                }
             }
             if (inputSplit[0].equals("delete")) {
-                model.deleteList(Integer.parseInt(inputSplit[1]));
+                try {
+                    model.deleteList(Integer.parseInt(inputSplit[1]));
+                } catch (Exception e) {
+                    view.showError();
+                }
             }
             if (input.equals("exit")) {
-               endCondition = false;
+                endCondition = false;
             }
 
         } while (endCondition);
+    }
+
+    public String text(String[] inputSplit){
+        String result="";
+        for(int i = 2; i<inputSplit.length;i++){
+            result += inputSplit[i] + " ";
+        }
+        return result;
     }
 }
