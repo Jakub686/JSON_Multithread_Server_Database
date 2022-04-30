@@ -1,8 +1,10 @@
-package client;
+package server;
 
 public class Model {
 
     private String[] data = new String[101];
+
+
 
     public Model() {
     }

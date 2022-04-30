@@ -1,4 +1,4 @@
-package client;
+package server;
 
 public class View {
 
@@ -7,6 +7,9 @@ public class View {
     }
 
     public void showError(){
-        System.out.println("Error");
+        System.out.println("ERROR");
+    }
+    public void showOk(){
+        System.out.println("OK");
     }
 }
