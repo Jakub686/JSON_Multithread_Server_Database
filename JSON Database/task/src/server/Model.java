@@ -4,18 +4,12 @@ public class Model {
 
     private String[] data = new String[101];
 
-
-
-    public Model() {
-    }
-
     public void setList(int index, String text) {
-
         data[index] = text;
     }
 
-    public void deleteList(int index)
-    {
+    public void deleteList(int index) {
+
         data[index] = null;
     }
 
@@ -23,4 +17,5 @@ public class Model {
 
         return data[index];
     }
+
 }
