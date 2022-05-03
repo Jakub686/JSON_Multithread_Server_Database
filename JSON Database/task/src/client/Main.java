@@ -17,14 +17,16 @@ public class Main {
                 DataInputStream input = new DataInputStream(socket.getInputStream());
                 DataOutputStream output = new DataOutputStream(socket.getOutputStream())
         ) {
-            Scanner scanner = new Scanner(System.in);
-            String msg = scanner.nextLine();
+            while (true) {
+                Scanner scanner = new Scanner(System.in);
+                String msg = scanner.nextLine();
 
-            output.writeUTF(msg); // sending message to the server
-            System.out.println("Client sent "+ msg);
-            String receivedMsg = input.readUTF(); // response message
+                output.writeUTF(msg); // sending message to the server
+                System.out.println("Client sent " + msg);
+                String receivedMsg = input.readUTF(); // response message
 
-            System.out.println("Received from server: " + receivedMsg);
+                System.out.println("Received from server: " + receivedMsg);
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
