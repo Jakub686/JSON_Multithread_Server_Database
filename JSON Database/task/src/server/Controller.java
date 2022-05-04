@@ -14,46 +14,47 @@ public class Controller {
         this.view = view;
     }
 
-    public void run() {
-        boolean endCondition = true;
+    public String run(String input) {
 
-        do {
-            String input = sc.nextLine();
-            String[] inputSplit = input.split(" ");
+        String result = "";
+        String[] inputSplit = input.split(" ");
 
+        if (inputSplit[0].equals("get")) {
+            try {
+                if (model.getList(Integer.parseInt(inputSplit[1])) == null) {
+                    result = view.showError();
+                } else {
+                    result = view.show(model.getList(Integer.parseInt(inputSplit[1])));
+                }
+            } catch (Exception e) {//idex out of  exception
+                result = view.showError();
+            }
+        }
+        if (inputSplit[0].equals("set")) {
+            try {
+                model.setList(Integer.parseInt(inputSplit[1]), text(inputSplit));
+                result = view.showOk();
+            } catch (Exception e) {
+                result = view.showError();
+            }
+        }
+        if (inputSplit[0].equals("delete")) {
+            try {
+                model.deleteList(Integer.parseInt(inputSplit[1]));
+                result = view.showOk();
+            } catch (Exception e) {
+                result = view.showError();
+            }
+        }
+        if (inputSplit[0].equals("exit")) {
+            try {
+                result = view.showOk();
+            } catch (Exception e) {
+                result = view.showError();
+            }
+        }
 
-            // czy pojedyncze CRUD w try check czy lepien cale?
-            if (inputSplit[0].equals("get")) {
-                try {
-                    if (model.getList(Integer.parseInt(inputSplit[1])) == null) {
-                        view.showError();
-                    } else {
-                        view.show(model.getList(Integer.parseInt(inputSplit[1])));
-                    }
-                } catch (Exception e) {//idex out of  exception
-                    view.showError();
-                }
-            }
-            if (inputSplit[0].equals("set")) {
-                try {
-                    model.setList(Integer.parseInt(inputSplit[1]), text(inputSplit));
-                    view.showOk();
-                } catch (Exception e) {
-                    view.showError();
-                }
-            }
-            if (inputSplit[0].equals("delete")) {
-                try {
-                    model.deleteList(Integer.parseInt(inputSplit[1]));
-                    view.showOk();
-                } catch (Exception e) {
-                    view.showError();
-                }
-            }
-            if (input.equals("exit")) {
-                endCondition = false;
-            }
-        } while (endCondition);
+        return result;
     }
 
     public String text(String[] inputSplit) {

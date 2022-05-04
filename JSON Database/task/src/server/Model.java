@@ -2,7 +2,7 @@ package server;
 
 public class Model {
 
-    private String[] data = new String[101];
+    private String[] data = new String[1000];
 
     public void setList(int index, String text) {
         data[index] = text;
