@@ -1,9 +1,13 @@
 package client;
 
-import java.io.*;
-import java.net.Socket;
 import com.beust.jcommander.JCommander;
 import com.beust.jcommander.Parameter;
+import com.google.gson.Gson;
+
+import java.io.*;
+import java.net.Socket;
+
+
 
 public class Main {
 
@@ -11,37 +15,50 @@ public class Main {
     private static final int SERVER_PORT = 34522;
 
     public static void main(String[] args) {
-        System.out.println("Client started");
+        System.out.println("Client started");// Clinet tez musi miec swoja klase View?
 
-            try (
-                    Socket socket = new Socket(SERVER_ADDRESS, SERVER_PORT);
-                    DataInputStream input = new DataInputStream(socket.getInputStream());
-                    DataOutputStream output = new DataOutputStream(socket.getOutputStream())
-            ) {
-//                Scanner scanner = new Scanner(System.in);
-//                String msg = scanner.nextLine();
+        Args jArgs = new Args();
+        ObjectToSend objectToSend = new ObjectToSend();
+        Gson gson = new Gson();
 
-                //------------------------ Jcommander
-                String msg= "";
-                if(args.length == 2)
-                    msg = args[1];
+        JCommander cmd = JCommander.newBuilder().addObject(jArgs).build();
+        cmd.parse(args);
 
-                if(args.length == 4)
-                msg = args[1]+ " " + args[3];
-
-                if(args.length == 6)
-                    msg = args[1]+" " + args[3]+ " " + args[5];
-                //----------------
-
-                System.out.println("Sent: " + msg);
-                output.writeUTF(msg); // sending message to the server
-                String receivedMsg = input.readUTF(); // response message
-                System.out.println("Received: " + receivedMsg);
-
-            } catch (IOException e) {
-                e.printStackTrace();
+        try (
+                Socket socket = new Socket(SERVER_ADDRESS, SERVER_PORT);
+                DataInputStream input = new DataInputStream(socket.getInputStream());
+                DataOutputStream output = new DataOutputStream(socket.getOutputStream())
+        ) {
+            String msg = "";
+            String jsonString ="";
+            if(jArgs.type!=null) {
+                msg = jArgs.type;
             }
+            if(jArgs.type!=null & jArgs.key!=null) {
+                msg = jArgs.type + " " + jArgs.key;
+            }
+            if(jArgs.type!=null & jArgs.key!=null & jArgs.value!=null) {
+                msg = jArgs.type + " " + jArgs.key + " " +jArgs.value;
+                objectToSend.type=jArgs.type;
+                objectToSend.key=jArgs.key;
+                objectToSend.value=jArgs.value;
 
+            }
+            // Czy takie infomacje tez dawac do View?
+            System.out.println("Sent: " + msg);
+
+            //TO JSON //
+            //Serlialization
+            String json = gson.toJson(objectToSend);
+            output.writeUTF(json); // sending message to the server
+            String receivedMsg = input.readUTF(); // response message
+
+            //Deserialization
+            System.out.println("Received: " + receivedMsg);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
 
