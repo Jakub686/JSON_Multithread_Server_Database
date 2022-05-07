@@ -1,5 +1,6 @@
 package server;
 
+// Moze mniejc klinet View, server contoler i model? taki podzial jest poprawny?
 public class View {
 
     public String show(String data) {

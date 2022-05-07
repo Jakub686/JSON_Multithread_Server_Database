@@ -17,6 +17,7 @@ public class Controller {
     public String run(String input) {
 
         String result = "";
+        System.out.println(input);
         String[] inputSplit = input.split(" ");
 
         if (inputSplit[0].equals("get")) {

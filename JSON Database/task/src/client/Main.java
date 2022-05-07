@@ -18,7 +18,7 @@ public class Main {
         System.out.println("Client started");// Clinet tez musi miec swoja klase View?
 
         Args jArgs = new Args();
-        ObjectToSend objectToSend = new ObjectToSend();
+        MyObject myObject = new MyObject();
         Gson gson = new Gson();
 
         JCommander cmd = JCommander.newBuilder().addObject(jArgs).build();
@@ -30,7 +30,6 @@ public class Main {
                 DataOutputStream output = new DataOutputStream(socket.getOutputStream())
         ) {
             String msg = "";
-            String jsonString ="";
             if(jArgs.type!=null) {
                 msg = jArgs.type;
             }
@@ -39,9 +38,9 @@ public class Main {
             }
             if(jArgs.type!=null & jArgs.key!=null & jArgs.value!=null) {
                 msg = jArgs.type + " " + jArgs.key + " " +jArgs.value;
-                objectToSend.type=jArgs.type;
-                objectToSend.key=jArgs.key;
-                objectToSend.value=jArgs.value;
+                myObject.type=jArgs.type;
+                myObject.key=jArgs.key;
+                myObject.value=jArgs.value;
 
             }
             // Czy takie infomacje tez dawac do View?
@@ -49,7 +48,7 @@ public class Main {
 
             //TO JSON //
             //Serlialization
-            String json = gson.toJson(objectToSend);
+            String json = gson.toJson(myObject);
             output.writeUTF(json); // sending message to the server
             String receivedMsg = input.readUTF(); // response message
 
