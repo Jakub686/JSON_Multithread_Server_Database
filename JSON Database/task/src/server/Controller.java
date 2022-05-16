@@ -14,40 +14,41 @@ public class Controller {
         this.view = view;
     }
 
-    public String run(String input) {
+    public String run(ReceiveObject input) {
 
         String result = "";
-        System.out.println(input);
-        String[] inputSplit = input.split(" ");
+        //System.out.println(input);
+        //String[] inputSplit = input.split(" ");
 
-        if (inputSplit[0].equals("get")) {
+        if (input.type.equals("get")) {
+            System.out.println(model.getList(input.key));
             try {
-                if (model.getList(Integer.parseInt(inputSplit[1])) == null) {
+                if (model.getList(input.key) == null) {
                     result = view.showError();
                 } else {
-                    result = view.show(model.getList(Integer.parseInt(inputSplit[1])));
+                    result = view.show(model.getList(input.key));
                 }
             } catch (Exception e) {//idex out of  exception
                 result = view.showError();
             }
         }
-        if (inputSplit[0].equals("set")) {
+        if (input.type.equals("set")) {
             try {
-                model.setList(Integer.parseInt(inputSplit[1]), text(inputSplit));
+                model.setList(input.key,input.value);
                 result = view.showOk();
             } catch (Exception e) {
                 result = view.showError();
             }
         }
-        if (inputSplit[0].equals("delete")) {
+        if (input.type.equals("delete")) {
             try {
-                model.deleteList(Integer.parseInt(inputSplit[1]));
+                model.deleteList(input.key);
                 result = view.showOk();
             } catch (Exception e) {
                 result = view.showError();
             }
         }
-        if (inputSplit[0].equals("exit")) {
+        if (input.type.equals("exit")) {
             try {
                 result = view.showOk();
             } catch (Exception e) {

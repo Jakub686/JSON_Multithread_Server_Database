@@ -1,7 +1,6 @@
 package client;
 
 import com.beust.jcommander.JCommander;
-import com.beust.jcommander.Parameter;
 import com.google.gson.Gson;
 
 import java.io.*;
@@ -18,7 +17,7 @@ public class Main {
         System.out.println("Client started");// Clinet tez musi miec swoja klase View?
 
         Args jArgs = new Args();
-        MyObject myObject = new MyObject();
+        SendObject myObject = new SendObject();
         Gson gson = new Gson();
 
         JCommander cmd = JCommander.newBuilder().addObject(jArgs).build();
@@ -32,24 +31,29 @@ public class Main {
             String msg = "";
             if(jArgs.type!=null) {
                 msg = jArgs.type;
+                myObject.type=jArgs.type;
             }
             if(jArgs.type!=null & jArgs.key!=null) {
                 msg = jArgs.type + " " + jArgs.key;
+                myObject.type=jArgs.type;
+                myObject.key=jArgs.key;
             }
             if(jArgs.type!=null & jArgs.key!=null & jArgs.value!=null) {
                 msg = jArgs.type + " " + jArgs.key + " " +jArgs.value;
                 myObject.type=jArgs.type;
                 myObject.key=jArgs.key;
                 myObject.value=jArgs.value;
-
             }
-            // Czy takie infomacje tez dawac do View?
-            System.out.println("Sent: " + msg);
+
 
             //TO JSON //
             //Serlialization
+
             String json = gson.toJson(myObject);
             output.writeUTF(json); // sending message to the server
+
+            // Czy takie infomacje tez dawac do View?
+            System.out.println("Sent: " + json);
             String receivedMsg = input.readUTF(); // response message
 
             //Deserialization
