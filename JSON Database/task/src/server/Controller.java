@@ -14,49 +14,56 @@ public class Controller {
         this.view = view;
     }
 
-    public String run(ReceiveObject input) {
-
-        String result = "";
-        //System.out.println(input);
-        //String[] inputSplit = input.split(" ");
+    //Run should return object not String
+    public ServerRespond run(ClientRequest input) {
+        ServerRespond serverRespond = new ServerRespond();
 
         if (input.type.equals("get")) {
             System.out.println(model.getList(input.key));
             try {
                 if (model.getList(input.key) == null) {
-                    result = view.showError();
+                    serverRespond.response = view.showError();
+                    serverRespond.reason = view.showNoSuchKey();
+
                 } else {
-                    result = view.show(model.getList(input.key));
+                    serverRespond.response = view.showOk();
+                    serverRespond.value = view.show(model.getList(input.key));
                 }
             } catch (Exception e) {//idex out of  exception
-                result = view.showError();
+                serverRespond.response = view.showError();
             }
         }
         if (input.type.equals("set")) {
             try {
                 model.setList(input.key,input.value);
-                result = view.showOk();
+                serverRespond.response = view.showOk();
             } catch (Exception e) {
-                result = view.showError();
+                serverRespond.response = view.showError();
             }
         }
         if (input.type.equals("delete")) {
             try {
-                model.deleteList(input.key);
-                result = view.showOk();
+                if (model.getList(input.key) == null) {
+                    serverRespond.response = view.showError();
+                    serverRespond.reason = view.showNoSuchKey();
+                }else {
+                    model.deleteList(input.key);
+                    serverRespond.response = view.showOk();
+                }
             } catch (Exception e) {
-                result = view.showError();
+                serverRespond.response = view.showError();
+                serverRespond.reason = view.showNoSuchKey();
             }
         }
         if (input.type.equals("exit")) {
             try {
-                result = view.showOk();
+                serverRespond.response = view.showOk();
             } catch (Exception e) {
-                result = view.showError();
+                serverRespond.response = view.showError();
             }
         }
 
-        return result;
+        return serverRespond;
     }
 
     public String text(String[] inputSplit) {

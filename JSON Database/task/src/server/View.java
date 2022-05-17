@@ -15,4 +15,5 @@ public class View {
     public String showServerStarted(){
         return "Server started!";
     }
+    public String showNoSuchKey(){return "No such key";}
 }

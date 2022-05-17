@@ -1,26 +1,26 @@
 package client;
 
-public class SendObject {
+public class ClientRequest {
     String type;
     int key;
     String value;
 
-    public SendObject(String type, int key, String value) {
+    public ClientRequest(String type, int key, String value) {
         this.type = type;
         this.key = key;
         this.value = value;
     }
 
-    public SendObject(String type, int key) {
+    public ClientRequest(String type, int key) {
         this.type = type;
         this.key = key;
     }
 
-    public SendObject(String type) {
+    public ClientRequest(String type) {
         this.type = type;
     }
 
-    public SendObject(){
+    public ClientRequest(){
 
     }
 

@@ -17,7 +17,7 @@ public class Main {
         System.out.println("Client started");// Clinet tez musi miec swoja klase View?
 
         Args jArgs = new Args();
-        SendObject myObject = new SendObject();
+        ClientRequest clientRequest = new ClientRequest();
         Gson gson = new Gson();
 
         JCommander cmd = JCommander.newBuilder().addObject(jArgs).build();
@@ -28,36 +28,30 @@ public class Main {
                 DataInputStream input = new DataInputStream(socket.getInputStream());
                 DataOutputStream output = new DataOutputStream(socket.getOutputStream())
         ) {
-            String msg = "";
+
             if(jArgs.type!=null) {
-                msg = jArgs.type;
-                myObject.type=jArgs.type;
+                clientRequest.type=jArgs.type;
             }
             if(jArgs.type!=null & jArgs.key!=null) {
-                msg = jArgs.type + " " + jArgs.key;
-                myObject.type=jArgs.type;
-                myObject.key=jArgs.key;
+                clientRequest.type=jArgs.type;
+                clientRequest.key=jArgs.key;
             }
             if(jArgs.type!=null & jArgs.key!=null & jArgs.value!=null) {
-                msg = jArgs.type + " " + jArgs.key + " " +jArgs.value;
-                myObject.type=jArgs.type;
-                myObject.key=jArgs.key;
-                myObject.value=jArgs.value;
+                clientRequest.type=jArgs.type;
+                clientRequest.key=jArgs.key;
+                clientRequest.value=jArgs.value;
             }
 
-
-            //TO JSON //
             //Serlialization
-
-            String json = gson.toJson(myObject);
-            output.writeUTF(json); // sending message to the server
+            String jsonRequest = gson.toJson(clientRequest);
+            output.writeUTF(jsonRequest); // sending message to the server
 
             // Czy takie infomacje tez dawac do View?
-            System.out.println("Sent: " + json);
-            String receivedMsg = input.readUTF(); // response message
+            System.out.println("Sent: " + jsonRequest);
+            String jsonRespond = input.readUTF(); // response message
 
+            System.out.println("Received: " + jsonRespond);
             //Deserialization
-            System.out.println("Received: " + receivedMsg);
 
         } catch (IOException e) {
             e.printStackTrace();

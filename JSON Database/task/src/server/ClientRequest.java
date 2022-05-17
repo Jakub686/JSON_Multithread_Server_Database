@@ -1,13 +1,18 @@
 package server;
-// chyba moge wykozystac ta sama klase MyObject ktora jest w Cilient? Czy ta klasa jest nie potrzebna?
-public class ReceiveObject {
+
+public class ClientRequest {
     String type;
     int key;
     String value;
 
+    public ClientRequest(String type, int key, String value) {
+        this.type = type;
+        this.key = key;
+        this.value = value;
+    }
 
 
-    public ReceiveObject(){
+    public ClientRequest(){
 
     }
 
