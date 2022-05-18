@@ -67,7 +67,6 @@ public class Main {
 
             System.out.println("Received: " + jsonRespond);
             //Deserialization
-
         } catch (IOException e) {
             e.printStackTrace();
         }
