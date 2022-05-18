@@ -11,8 +11,9 @@ public class ServerRespond {
         this.value = value;
     }
 
-    public ServerRespond(){
 
+
+    public ServerRespond(){
     }
 
 

@@ -1,9 +1,7 @@
 package server;
 
-import java.util.Scanner;
 
 public class Controller {
-    Scanner sc = new Scanner(System.in);
 
     //TODO dependency injection
     private Model model;
@@ -14,7 +12,7 @@ public class Controller {
         this.view = view;
     }
 
-    //Run should return object not String
+
     public ServerRespond run(ClientRequest input) {
         ServerRespond serverRespond = new ServerRespond();
 
@@ -29,7 +27,7 @@ public class Controller {
                     serverRespond.response = view.showOk();
                     serverRespond.value = view.show(model.getList(input.key));
                 }
-            } catch (Exception e) {//idex out of  exception
+            } catch (Exception e) {//index out of  exception
                 serverRespond.response = view.showError();
             }
         }
@@ -66,11 +64,4 @@ public class Controller {
         return serverRespond;
     }
 
-    public String text(String[] inputSplit) {
-        String result = "";
-        for (int i = 2; i < inputSplit.length; i++) {
-            result += inputSplit[i] + " ";
-        }
-        return result;
-    }
 }

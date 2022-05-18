@@ -16,8 +16,13 @@ public class Main {
     public static void main(String[] args) {
         System.out.println("Client started");// Clinet tez musi miec swoja klase View?
 
+        //Jcommaneder
         Args jArgs = new Args();
-        ClientRequest clientRequest = new ClientRequest();
+        //Create Object Request
+        ClientRequestExit clientRequestExit = new ClientRequestExit();
+        ClientRequestGetDelete clientRequestGetDelete = new ClientRequestGetDelete();
+        ClientRequestSet clientRequestSet = new ClientRequestSet();
+        //Gson
         Gson gson = new Gson();
 
         JCommander cmd = JCommander.newBuilder().addObject(jArgs).build();
@@ -29,25 +34,35 @@ public class Main {
                 DataOutputStream output = new DataOutputStream(socket.getOutputStream())
         ) {
 
-            if(jArgs.type!=null) {
-                clientRequest.type=jArgs.type;
+            //Create Object Request
+            if(jArgs.type.equals("exit")) {
+                clientRequestExit.type=jArgs.type;
+                String jsonRequest = gson.toJson(clientRequestExit);
+                output.writeUTF(jsonRequest); // sending message to the server
+                System.out.println("Sent: " + jsonRequest);
             }
-            if(jArgs.type!=null & jArgs.key!=null) {
-                clientRequest.type=jArgs.type;
-                clientRequest.key=jArgs.key;
+            if(jArgs.type.equals("get") | jArgs.type.equals("delete")) {
+                clientRequestGetDelete.type=jArgs.type;
+                clientRequestGetDelete.key=jArgs.key;
+                String jsonRequest = gson.toJson(clientRequestGetDelete);
+                output.writeUTF(jsonRequest); // sending message to the server
+                System.out.println("Sent: " + jsonRequest);
             }
-            if(jArgs.type!=null & jArgs.key!=null & jArgs.value!=null) {
-                clientRequest.type=jArgs.type;
-                clientRequest.key=jArgs.key;
-                clientRequest.value=jArgs.value;
+            if(jArgs.type.equals("set")) {
+                clientRequestSet.type = jArgs.type;
+                clientRequestSet.key = jArgs.key;
+                clientRequestSet.value = jArgs.value;
+                String jsonRequest = gson.toJson(clientRequestSet);
+                output.writeUTF(jsonRequest); // sending message to the server
+                System.out.println("Sent: " + jsonRequest);
             }
+
 
             //Serlialization
-            String jsonRequest = gson.toJson(clientRequest);
-            output.writeUTF(jsonRequest); // sending message to the server
+//            String jsonRequest = gson.toJson(clientRequestExit);
+//            output.writeUTF(jsonRequest); // sending message to the server
 
-            // Czy takie infomacje tez dawac do View?
-            System.out.println("Sent: " + jsonRequest);
+
             String jsonRespond = input.readUTF(); // response message
 
             System.out.println("Received: " + jsonRespond);

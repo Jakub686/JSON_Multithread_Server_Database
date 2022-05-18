@@ -8,7 +8,7 @@ public class Args {
     String type;
 
     @Parameter(names = {"-k"})
-    Integer key;
+    String key;
 
     @Parameter(names = {"-v"})
     String value;
