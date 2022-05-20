@@ -33,7 +33,7 @@ public class Main {
                 DataInputStream input = new DataInputStream(socket.getInputStream());
                 DataOutputStream output = new DataOutputStream(socket.getOutputStream())
         ) {
-
+            //TODO refactor into method
             //Create Object Request
             if(jArgs.type.equals("exit")) {
                 clientRequestExit.type=jArgs.type;
@@ -57,13 +57,7 @@ public class Main {
                 System.out.println("Sent: " + jsonRequest);
             }
 
-
-            //Serlialization
-//            String jsonRequest = gson.toJson(clientRequestExit);
-//            output.writeUTF(jsonRequest); // sending message to the server
-
-
-            String jsonRespond = input.readUTF(); // response message
+              String jsonRespond = input.readUTF(); // response message
 
             System.out.println("Received: " + jsonRespond);
             //Deserialization

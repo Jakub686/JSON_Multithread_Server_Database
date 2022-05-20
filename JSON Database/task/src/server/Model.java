@@ -1,21 +1,38 @@
 package server;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+
 public class Model {
 
-    private String[] data = new String[1000];
+    //private String[] data = new String[1000];
 
-    public void setList(int index, String text) {
-        data[index] = text;
+    ObjectMapper mapper = new ObjectMapper();
+    HashMap<String, String> data = new HashMap<String, String>();
+
+
+    public void setList(String index, String text) throws IOException {
+        data.put(index, text);
+
+    }
+    public void deleteList(String index) throws IOException {
+
+        data.remove(index);
+
     }
 
-    public void deleteList(int index) {
+    public String getList(String index) {
 
-        data[index] = null;
+        return data.get(index);
     }
 
-    public String getList(int index) {
 
-        return data[index];
-    }
 
 }
