@@ -15,7 +15,8 @@ public class Model {
     //private String[] data = new String[1000];
 
     ObjectMapper mapper = new ObjectMapper();
-    HashMap<String, String> data = new HashMap<String, String>();
+    HashMap<String, String> data = new HashMap<>();
+
 
 
     public void setList(String index, String text) throws IOException {
@@ -28,9 +29,11 @@ public class Model {
 
     }
 
-    public String getList(String index) {
+    public String getList(String index) throws IOException {
 
-        return data.get(index);
+        HashMap<String, String> map = mapper.readValue(new File("D:\\java examples\\JSON Database\\JSON Database\\task\\src\\server\\data\\sab.json"), new TypeReference<HashMap<String, String>>() {});
+
+        return map.get(index);
     }
 
 

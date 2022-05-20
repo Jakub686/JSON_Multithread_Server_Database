@@ -1,6 +1,8 @@
 package server;
 
 
+import java.io.IOException;
+
 public class Controller {
 
     //TODO dependency injection
@@ -13,7 +15,7 @@ public class Controller {
     }
 
 
-    public ServerRespond run(ClientRequest input) {
+    public ServerRespond run(ClientRequest input) throws IOException {
         ServerRespond serverRespond = new ServerRespond();
 
         if (input.type.equals("get")) {
