@@ -12,7 +12,7 @@ import java.util.HashMap;
 
 public class Model {
 
-    private static String PATH ="D:\\java examples\\JSON Database\\JSON Database\\task\\src\\server\\data\\sab.json";
+    private static String PATH ="D:\\java examples\\JSON Database\\JSON Database\\task\\src\\server\\data\\db.json";
     ObjectMapper mapper = new ObjectMapper();
     HashMap<String, String> data = new HashMap<>();
 
@@ -46,7 +46,7 @@ public class Model {
     //send hashmap to Json file
     public void setData(HashMap data) throws IOException{
         String jsonStr = mapper.writeValueAsString(data);
-        BufferedWriter write = new BufferedWriter(new FileWriter("D:\\java examples\\JSON Database\\JSON Database\\task\\src\\server\\data\\sab.json"));
+        BufferedWriter write = new BufferedWriter(new FileWriter(PATH));
         write.write(jsonStr);
         write.close();
     }
