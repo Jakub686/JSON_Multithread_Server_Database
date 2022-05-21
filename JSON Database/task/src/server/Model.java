@@ -2,38 +2,53 @@ package server;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.Map;
 
 public class Model {
 
-    //private String[] data = new String[1000];
-
+    private static String PATH ="D:\\java examples\\JSON Database\\JSON Database\\task\\src\\server\\data\\sab.json";
     ObjectMapper mapper = new ObjectMapper();
     HashMap<String, String> data = new HashMap<>();
 
-
-
     public void setList(String index, String text) throws IOException {
+        //get hashmap from Json file
+        getData(index, data);
+        //add object to hashmap
         data.put(index, text);
-
+        //send hashmap to Json file
+        setData(data);
     }
     public void deleteList(String index) throws IOException {
-
+        //get hashmap from Json file
+        getData(index, data);
+        //remove object from hashmap
         data.remove(index);
-
+        //send hashmap to Json file
+        setData(data);
+    }
+    //get
+    public String getList(String index) throws IOException {
+        //get hashmap from Json file
+        getData(index, data);
+        return data.get(index);
     }
 
-    public String getList(String index) throws IOException {
-
-        HashMap<String, String> map = mapper.readValue(new File("D:\\java examples\\JSON Database\\JSON Database\\task\\src\\server\\data\\sab.json"), new TypeReference<HashMap<String, String>>() {});
-
-        return map.get(index);
+    //get hashmap from Json file
+    public void getData(String index,HashMap data) throws IOException{
+        data = mapper.readValue(new File(PATH), new TypeReference<HashMap<String, String>>() {});
+    }
+    //send hashmap to Json file
+    public void setData(HashMap data) throws IOException{
+        String jsonStr = mapper.writeValueAsString(data);
+        BufferedWriter write = new BufferedWriter(new FileWriter("D:\\java examples\\JSON Database\\JSON Database\\task\\src\\server\\data\\sab.json"));
+        write.write(jsonStr);
+        write.close();
     }
 
 

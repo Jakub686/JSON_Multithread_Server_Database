@@ -18,15 +18,14 @@ public class Main {
 
         //Jcommaneder
         Args jArgs = new Args();
+        JCommander cmd = JCommander.newBuilder().addObject(jArgs).build();
+        cmd.parse(args);
         //Create Object Request
         ClientRequestExit clientRequestExit = new ClientRequestExit();
         ClientRequestGetDelete clientRequestGetDelete = new ClientRequestGetDelete();
         ClientRequestSet clientRequestSet = new ClientRequestSet();
-        //Gson
         Gson gson = new Gson();
 
-        JCommander cmd = JCommander.newBuilder().addObject(jArgs).build();
-        cmd.parse(args);
 
         try (
                 Socket socket = new Socket(SERVER_ADDRESS, SERVER_PORT);
@@ -60,7 +59,7 @@ public class Main {
               String jsonRespond = input.readUTF(); // response message
 
             System.out.println("Received: " + jsonRespond);
-            //Deserialization
+
         } catch (IOException e) {
             e.printStackTrace();
         }

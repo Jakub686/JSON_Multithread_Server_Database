@@ -29,7 +29,7 @@ public class Controller {
                     serverRespond.response = view.showOk();
                     serverRespond.value = view.show(model.getList(input.key));
                 }
-            } catch (Exception e) {//index out of  exception
+            } catch (IOException e) {
                 serverRespond.response = view.showError();
             }
         }
@@ -50,7 +50,7 @@ public class Controller {
                     model.deleteList(input.key);
                     serverRespond.response = view.showOk();
                 }
-            } catch (Exception e) {
+            } catch (IOException e) {
                 serverRespond.response = view.showError();
                 serverRespond.reason = view.showNoSuchKey();
             }
