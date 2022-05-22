@@ -27,6 +27,7 @@ public class Model {
     public void deleteList(String index) throws IOException {
         //get hashmap from Json file
         getData(index, data);
+
         //remove object from hashmap
         data.remove(index);
         //send hashmap to Json file
@@ -35,13 +36,13 @@ public class Model {
     //get
     public String getList(String index) throws IOException {
         //get hashmap from Json file
-        getData(index, data);
+        data = getData(index, data);
         return data.get(index);
     }
 
     //get hashmap from Json file
-    public void getData(String index,HashMap data) throws IOException{
-        data = mapper.readValue(new File(PATH), new TypeReference<HashMap<String, String>>() {});
+    public HashMap getData(String index,HashMap data) throws IOException{
+        return data = mapper.readValue(new File(PATH), new TypeReference<HashMap<String, String>>() {});
     }
     //send hashmap to Json file
     public void setData(HashMap data) throws IOException{

@@ -19,7 +19,7 @@ public class Controller {
         ServerRespond serverRespond = new ServerRespond();
 
         if (input.type.equals("get")) {
-            System.out.println(model.getList(input.key));
+
             try {
                 if (model.getList(input.key) == null) {
                     serverRespond.response = view.showError();
