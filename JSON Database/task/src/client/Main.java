@@ -24,7 +24,6 @@ public class Main {
         ObjectMapper mapper = new ObjectMapper();
         mapper.enable(SerializationFeature.INDENT_OUTPUT);
 
-
         //Jcommaneder
         Args jArgs = new Args();
         JCommander cmd = JCommander.newBuilder().addObject(jArgs).build();
@@ -47,11 +46,54 @@ public class Main {
             //Create Object Request
 
             //TODO to jest dobre podejscie? zeby nie tworzyc metody statycznej to musze stworzyc obiekt, a w tym przypadku obiektem jest Main.
-            Main main = new Main();
+
 
             //--------------------------
 
-                    main.createRequestFromFile(mapper,clientRequestSet, jArgs,gson,output);
+            try {
+                if (jArgs.file.equals("testSet.json")) {
+                    try {
+                        Map<String, String> map = mapper.readValue(new File("D:\\java examples\\JSON Database\\JSON Database\\task\\src\\client\\data\\testSet.json"), new TypeReference<Map<String, String>>() {});
+                        clientRequestSet.setType(map.get("type"));
+                        clientRequestSet.setKey(map.get("key"));
+                        clientRequestSet.setValue(map.get("value"));
+                        String jsonRequest = gson.toJson(clientRequestSet);
+                        output.writeUTF(jsonRequest); // sending message to the server
+                        System.out.println("Sent: " + jsonRequest);
+                    } catch (IOException e) {
+                    }
+                }
+            } catch (NullPointerException e) {
+            }
+
+            try {
+                if (jArgs.file.equals("testGet.json")) {
+                    try {
+                        Map<String, String> map = mapper.readValue(new File("D:\\java examples\\JSON Database\\JSON Database\\task\\src\\client\\data\\testGet.json"), new TypeReference<Map<String, String>>() {});
+                        clientRequestSet.setType(map.get("type"));
+                        clientRequestSet.setKey(map.get("key"));
+                        String jsonRequest = gson.toJson(clientRequestSet);
+                        output.writeUTF(jsonRequest); // sending message to the server
+                        System.out.println("Sent: " + jsonRequest);
+                    } catch (IOException e) {
+                    }
+                }
+            } catch (NullPointerException e) {
+            }
+            try {
+                if (jArgs.file.equals("testDelete.json")) {
+                    try {
+                        Map<String, String> map = mapper.readValue(new File("D:\\java examples\\JSON Database\\JSON Database\\task\\src\\client\\data\\testDelete.json"), new TypeReference<Map<String, String>>() {});
+                        clientRequestSet.setType(map.get("type"));
+                        clientRequestSet.setKey(map.get("key"));
+                        String jsonRequest = gson.toJson(clientRequestSet);
+                        output.writeUTF(jsonRequest); // sending message to the server
+                        System.out.println("Sent: " + jsonRequest);
+                    } catch (IOException e) {
+                    }
+                }
+            } catch (NullPointerException e) {
+            }
 
             //--------------------------
 
@@ -90,31 +132,7 @@ public class Main {
         }
     }
 
-    private void createRequestFromFile(ObjectMapper mapper,ClientRequestSet clientRequestSet, Args jArgs,Gson gson,DataOutputStream output) {
-        try {
-            if (jArgs.file.equals("testSet.json")) {
-                try {
-                    Map<String, String> map = mapper.readValue(new File("D:\\java examples\\JSON Database\\JSON Database\\task\\src\\client\\data\\testSet.json"), new TypeReference<Map<String, String>>() {});
-                    clientRequestSet.setType(map.get("type"));
-                    clientRequestSet.setKey(map.get("key"));
-                    clientRequestSet.setValue(map.get("value"));
-                    String jsonRequest = gson.toJson(clientRequestSet);
-                    output.writeUTF(jsonRequest); // sending message to the server
-                    System.out.println("Sent: " + jsonRequest);
-                } catch (IOException e) {
-                }
-            }
 
-
-        } catch (NullPointerException e) {
-        }
-    }
-
-    void createRequestFromArgs(String input){
-    }
 }
-
-
-
 
 
