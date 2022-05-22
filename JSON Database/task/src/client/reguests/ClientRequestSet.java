@@ -1,10 +1,10 @@
-package client;
+package client.reguests;
 
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@NoArgsConstructor
-@AllArgsConstructor
+@Data
 public class ClientRequestSet {
     String type;
     String key;

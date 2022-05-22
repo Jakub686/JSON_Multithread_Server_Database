@@ -1,6 +1,6 @@
 package server;
 
-// Moze mniejc klinet View, server contoler i model? taki podzial jest poprawny?
+//TODO jak podzielic MVC na cilienta i server?
 public class View {
 
     public String show(String data) {

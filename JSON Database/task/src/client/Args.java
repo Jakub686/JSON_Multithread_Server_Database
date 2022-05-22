@@ -13,4 +13,7 @@ public class Args {
     @Parameter(names = {"-v"})
     String value;
 
+    @Parameter(names = {"-in"})
+    String file;
+
 }

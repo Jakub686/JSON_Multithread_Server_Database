@@ -5,7 +5,7 @@ import java.io.IOException;
 
 public class Controller {
 
-    //TODO dependency injection
+    //TODO dependency injection?
     private Model model;
     private View view;
 
