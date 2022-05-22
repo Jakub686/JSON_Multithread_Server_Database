@@ -18,7 +18,7 @@ public class Model {
 
     public void setList(String index, String text) throws IOException {
         //get hashmap from Json file
-        getData(index, data);
+        HashMap data = getData();
         //add object to hashmap
         data.put(index, text);
         //send hashmap to Json file
@@ -26,7 +26,7 @@ public class Model {
     }
     public void deleteList(String index) throws IOException {
         //get hashmap from Json file
-        getData(index, data);
+        //getData(index, data);
 
         //remove object from hashmap
         data.remove(index);
@@ -36,12 +36,13 @@ public class Model {
     //get
     public String getList(String index) throws IOException {
         //get hashmap from Json file
-        data = getData(index, data);
+
+        data = getData();
         return data.get(index);
     }
 
     //get hashmap from Json file
-    public HashMap getData(String index,HashMap data) throws IOException{
+    public HashMap getData() throws IOException{
         return data = mapper.readValue(new File(PATH), new TypeReference<HashMap<String, String>>() {});
     }
     //send hashmap to Json file
