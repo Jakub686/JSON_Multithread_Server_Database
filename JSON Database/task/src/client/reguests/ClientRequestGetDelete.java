@@ -1,4 +1,4 @@
-package client;
+package client.reguests;
 
 import lombok.Data;
 

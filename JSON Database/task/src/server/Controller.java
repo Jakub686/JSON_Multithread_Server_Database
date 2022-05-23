@@ -37,6 +37,7 @@ public class Controller {
             try {
                 model.setList(input.key,input.value);
                 serverRespond.response = view.showOk();
+
             } catch (Exception e) {
                 serverRespond.response = view.showError();
             }

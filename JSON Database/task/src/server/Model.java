@@ -12,11 +12,12 @@ import java.util.HashMap;
 
 public class Model {
 
+
     private static String PATH ="D:\\java examples\\JSON Database\\JSON Database\\task\\src\\server\\data\\db.json";
     ObjectMapper mapper = new ObjectMapper();
     HashMap<String, String> data = new HashMap<>();
 
-    public void setList(String index, String text) throws IOException {
+    public  void setList(String index, String text) throws IOException {
         //get hashmap from Json file
         HashMap data = getData();
         //add object to hashmap
@@ -24,7 +25,7 @@ public class Model {
         //send hashmap to Json file
         setData(data);
     }
-    public void deleteList(String index) throws IOException {
+    public  void deleteList(String index) throws IOException {
         //get hashmap from Json file
         //getData(index, data);
 
@@ -34,7 +35,7 @@ public class Model {
         setData(data);
     }
     //get
-    public String getList(String index) throws IOException {
+    public  String getList(String index) throws IOException {
         //get hashmap from Json file
 
         data = getData();

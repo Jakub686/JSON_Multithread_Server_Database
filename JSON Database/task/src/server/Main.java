@@ -38,6 +38,7 @@ public class Main {
 
                     //deserializtion
                     ClientRequest clientRequest = new Gson().fromJson(jsonRequest, ClientRequest.class);
+                    //System.out.println(clientRequest);
                     //Input request to conntorel, receive respond
                     serverRespond = new Controller(model, view).run(clientRequest);
 
