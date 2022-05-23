@@ -46,63 +46,66 @@ public class Main {
              DataInputStream input = new DataInputStream(socket.getInputStream());
              DataOutputStream output = new DataOutputStream(socket.getOutputStream())
         ) {
-            try {
-                if (jArgs.file.equals("testSet.json")) {
-                    try {
-                        Map<String, String> map = mapper.readValue(new File("D:\\java examples\\JSON Database\\JSON Database\\task\\src\\client\\data\\testSet.json"), new TypeReference<Map<String, String>>() {});
-                        clientRequestSet.setType(map.get("type"));
-                        clientRequestSet.setKey(map.get("key"));
-                        clientRequestSet.setValue(map.get("value"));
-                        jsonRequest = gson.toJson(clientRequestSet);
-                        output.writeUTF(jsonRequest); // sending message to the server
-                        System.out.println("Sent: " + jsonRequest);
-                    } catch (IOException e) {
-                    }
-                }
-            } catch (NullPointerException e) {
-            }
+//            try {
+//                if (jArgs.file.equals("testSet.json")) {
+//                    try {
+//                        Map<String, String> map = mapper.readValue(new File("D:\\java examples\\JSON Database\\JSON Database\\task\\src\\client\\data\\testSet.json"), new TypeReference<Map<String, String>>() {});
+//                        clientRequestSet.setType(map.get("type"));
+//                        clientRequestSet.setKey(map.get("key"));
+//                        clientRequestSet.setValue(map.get("value"));
+//                        jsonRequest = gson.toJson(clientRequestSet);
+//                        output.writeUTF(jsonRequest); // sending message to the server
+//                        System.out.println("Sent: " + jsonRequest);
+//                    } catch (IOException e) {
+//                    }
+//                }
+//            } catch (NullPointerException e) {
+//            }
 
-            try {
-                if (jArgs.file.equals("testGet.json")) {
-                    try {
-                        Map<String, String> map = mapper.readValue(new File("D:\\java examples\\JSON Database\\JSON Database\\task\\src\\client\\data\\testGet.json"), new TypeReference<Map<String, String>>() {});
-                        clientRequestSet.setType(map.get("type"));
-                        clientRequestSet.setKey(map.get("key"));
-                        jsonRequest = gson.toJson(clientRequestSet);
-                        output.writeUTF(jsonRequest); // sending message to the server
-                        System.out.println("Sent: " + jsonRequest);
-                    } catch (IOException e) {
-                    }
-                }
-            } catch (NullPointerException e) {
-            }
-            try {
-                if (jArgs.file.equals("testDelete.json")) {
-                    try {
-                        Map<String, String> map = mapper.readValue(new File("D:\\java examples\\JSON Database\\JSON Database\\task\\src\\client\\data\\testDelete.json"), new TypeReference<Map<String, String>>() {});
-                        clientRequestSet.setType(map.get("type"));
-                        clientRequestSet.setKey(map.get("key"));
-                        jsonRequest = gson.toJson(clientRequestSet);
-                        output.writeUTF(jsonRequest); // sending message to the server
-                        System.out.println("Sent: " + jsonRequest);
-                    } catch (IOException e) {
-                    }
-                }
-            } catch (NullPointerException e) {
-            }
+//            try {
+//                if (jArgs.file.equals("testGet.json")) {
+//                    try {
+//                        Map<String, String> map = mapper.readValue(new File("D:\\java examples\\JSON Database\\JSON Database\\task\\src\\client\\data\\testGet.json"), new TypeReference<Map<String, String>>() {});
+//                        clientRequestSet.setType(map.get("type"));
+//                        clientRequestSet.setKey(map.get("key"));
+//                        jsonRequest = gson.toJson(clientRequestSet);
+//                        output.writeUTF(jsonRequest); // sending message to the server
+//                        System.out.println("Sent: " + jsonRequest);
+//                    } catch (IOException e) {
+//                    }
+//                }
+//            } catch (NullPointerException e) {
+//            }
+//            try {
+//                if (jArgs.file.equals("testDelete.json")) {
+//                    try {
+//                        Map<String, String> map = mapper.readValue(new File("D:\\java examples\\JSON Database\\JSON Database\\task\\src\\client\\data\\testDelete.json"), new TypeReference<Map<String, String>>() {});
+//                        clientRequestSet.setType(map.get("type"));
+//                        clientRequestSet.setKey(map.get("key"));
+//                        jsonRequest = gson.toJson(clientRequestSet);
+//                        output.writeUTF(jsonRequest); // sending message to the server
+//                        System.out.println("Sent: " + jsonRequest);
+//                    } catch (IOException e) {
+//                    }
+//                }
+//            } catch (NullPointerException e) {
+//            }
 
             //--------------------------
 
 
             try {
+                if(jArgs.file!=null) {
 
+                    jsonRequest = createRequest.create(jArgs.file);
+                }
                 //set get delete
-                jsonRequest = createRequest.create(jArgs.type, jArgs.key, jArgs.value);
-
+                if(jArgs.file==null) {
+                    jsonRequest = createRequest.create(jArgs.type, jArgs.key, jArgs.value);
+                }
                 output.writeUTF(jsonRequest); // sending message to the server
                 System.out.println("Sent: " + jsonRequest);
                 //createRequest.create(jArgs.file);
-
 
             } catch (NullPointerException e) {
             }
