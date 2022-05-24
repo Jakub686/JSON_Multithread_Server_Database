@@ -25,18 +25,19 @@ public class Main {
 
         ObjectMapper mapper = new ObjectMapper();
         mapper.enable(SerializationFeature.INDENT_OUTPUT);
+
         String jsonRequest = "";
+        Gson gson = new Gson();
 
         //Jcommaneder
         Args jArgs = new Args();
         JCommander cmd = JCommander.newBuilder().addObject(jArgs).build();
         cmd.parse(args);
+
         //Create Object Request
-
         CreateRequest createRequest = new CreateRequest();
-        Gson gson = new Gson();
 
-        try (// czym sie rozni taki try catch od {}
+        try (
              Socket socket = new Socket(SERVER_ADDRESS, SERVER_PORT);
              DataInputStream input = new DataInputStream(socket.getInputStream());
              DataOutputStream output = new DataOutputStream(socket.getOutputStream())

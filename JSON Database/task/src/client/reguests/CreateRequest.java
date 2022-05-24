@@ -16,21 +16,21 @@ public class CreateRequest {
     ClientRequestExit clientRequestExit = new ClientRequestExit();
     String jsonRequest = "";
 
-    public String create(String type, String key, String value) {
+    public String create(String... jarg) {
 
-        if (type.equals("set")) {
-            clientRequestSet.setType(type);
-            clientRequestSet.setKey(key);
-            clientRequestSet.setValue(value);
+        if (jarg[0].equals("set")) {
+            clientRequestSet.setType(jarg[0]);
+            clientRequestSet.setKey(jarg[1]);
+            clientRequestSet.setValue(jarg[2]);
             jsonRequest = gson.toJson(clientRequestSet);
         }
-        if (type.equals("get") | type.equals("delete")) {
-            clientRequestGetDelete.setType(type);
-            clientRequestGetDelete.setKey(key);
+        if (jarg[0].equals("get") | jarg[0].equals("delete")) {
+            clientRequestGetDelete.setType(jarg[0]);
+            clientRequestGetDelete.setKey(jarg[1]);
             jsonRequest = gson.toJson(clientRequestGetDelete);
         }
-        if (type.equals("exit")) {
-            clientRequestExit.setType(type);
+        if (jarg[0].equals("exit")) {
+            clientRequestExit.setType(jarg[0]);
             jsonRequest = gson.toJson(clientRequestExit);
         }
         return jsonRequest;
