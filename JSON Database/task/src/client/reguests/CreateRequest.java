@@ -44,6 +44,13 @@ public class CreateRequest  {
             clientRequestSet.setValue(map.get("value"));
             jsonRequest = gson.toJson(clientRequestSet);
         }
+        if (file.equals("setFile.json")) {
+            System.out.println("flow");
+
+
+            jsonRequest = mapper.readValue(new File("D:\\java examples\\JSON Database\\JSON Database\\task\\src\\client\\data\\setFile.json"), new TypeReference<String>() {});
+        }
+
         if (file.equals("testGet.json")) {
             Map<String, String> map = mapper.readValue(new File("D:\\java examples\\JSON Database\\JSON Database\\task\\src\\client\\data\\testGet.json"), new TypeReference<Map<String, String>>() {});
             clientRequestSet.setType(map.get("type"));
