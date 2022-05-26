@@ -9,4 +9,8 @@ public class ClientRequestSet {
     String type;
     String key;
     String value;
+
+
+
+
 }
