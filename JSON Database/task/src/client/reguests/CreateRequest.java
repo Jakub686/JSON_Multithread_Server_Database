@@ -8,7 +8,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Map;
 
-public class CreateRequest {
+public class CreateRequest  {
     Gson gson = new Gson();
     ObjectMapper mapper = new ObjectMapper();
     ClientRequestSet clientRequestSet = new ClientRequestSet();
@@ -38,20 +38,27 @@ public class CreateRequest {
     public String create(String file) throws IOException {
 
         if (file.equals("testSet.json")) {
-            Map<String, String> map = mapper.readValue(new File("D:\\java examples\\JSON Database\\JSON Database\\task\\src\\client\\data\\testSet.json"), new TypeReference<Map<String, String>>() {});
+            Map<String, String> map = mapper.readValue(new File("data\\testSet.json"), new TypeReference<Map<String, String>>() {});
+            clientRequestSet.setType(map.get("type"));
+            clientRequestSet.setKey(map.get("key"));
+            clientRequestSet.setValue(map.get("value"));
+            jsonRequest = gson.toJson(clientRequestSet);
+        }
+        if (file.equals("setFile.json")) {
+            Map<String, String> map = mapper.readValue(new File("data\\setFile.json "), new TypeReference<Map<String, String>>() {});
             clientRequestSet.setType(map.get("type"));
             clientRequestSet.setKey(map.get("key"));
             clientRequestSet.setValue(map.get("value"));
             jsonRequest = gson.toJson(clientRequestSet);
         }
         if (file.equals("testGet.json")) {
-            Map<String, String> map = mapper.readValue(new File("D:\\java examples\\JSON Database\\JSON Database\\task\\src\\client\\data\\testGet.json"), new TypeReference<Map<String, String>>() {});
+            Map<String, String> map = mapper.readValue(new File("data\\testGet.json"), new TypeReference<Map<String, String>>() {});
             clientRequestSet.setType(map.get("type"));
             clientRequestSet.setKey(map.get("key"));
             jsonRequest = gson.toJson(clientRequestSet);
         }
         if (file.equals("testDelete.json")) {
-            Map<String, String> map = mapper.readValue(new File("D:\\java examples\\JSON Database\\JSON Database\\task\\src\\client\\data\\testDelete.json"), new TypeReference<Map<String, String>>() {});
+            Map<String, String> map = mapper.readValue(new File("data\\testDelete.json"), new TypeReference<Map<String, String>>() {});
             clientRequestSet.setType(map.get("type"));
             clientRequestSet.setKey(map.get("key"));
             jsonRequest = gson.toJson(clientRequestSet);

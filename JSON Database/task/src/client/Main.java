@@ -27,7 +27,6 @@ public class Main {
         mapper.enable(SerializationFeature.INDENT_OUTPUT);
 
         String jsonRequest = "";
-        Gson gson = new Gson();
 
         //Jcommaneder
         Args jArgs = new Args();
@@ -38,21 +37,22 @@ public class Main {
         CreateRequest createRequest = new CreateRequest();
 
         try (
-             Socket socket = new Socket(SERVER_ADDRESS, SERVER_PORT);
-             DataInputStream input = new DataInputStream(socket.getInputStream());
-             DataOutputStream output = new DataOutputStream(socket.getOutputStream())
+                Socket socket = new Socket(SERVER_ADDRESS, SERVER_PORT);
+                DataInputStream input = new DataInputStream(socket.getInputStream());
+                DataOutputStream output = new DataOutputStream(socket.getOutputStream())
         ) {
             try {
-                if(jArgs.file!=null) {
+                if (jArgs.file != null) {
                     jsonRequest = createRequest.create(jArgs.file);
                 }
                 //set get delete
-                if(jArgs.file==null) {
+                if (jArgs.file == null) {
                     jsonRequest = createRequest.create(jArgs.type, jArgs.key, jArgs.value);
                 }
                 output.writeUTF(jsonRequest); // sending message to the server
                 System.out.println("Sent: " + jsonRequest);
                 //createRequest.create(jArgs.file);
+
 
             } catch (NullPointerException e) {
             }
