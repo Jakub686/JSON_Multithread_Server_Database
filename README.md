@@ -45,3 +45,6 @@ pool-1-thread-4 : received: {"type":"exit"}
 pool-1-thread-4 : sent: {"response":"OK"}
 
 Process finished with exit code 0
+
+![image](https://user-images.githubusercontent.com/80157748/170810040-20ced70f-2a8a-4332-a110-1022e17caf5a.png)
+
