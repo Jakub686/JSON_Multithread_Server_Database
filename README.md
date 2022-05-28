@@ -15,34 +15,7 @@ Accepted client arguments:
 -in - read json with properties from file
 
 
-Server started!
+![image](https://user-images.githubusercontent.com/80157748/170810054-60230ed9-5e87-4dbd-ba1b-e04a8c9029a4.png)
 
-pool-1-thread-1 : received: {"type":"set","key":"mykey","value":"my value"}
-pool-1-thread-1 : sent: {"response":"OK"}
-
-pool-1-thread-2 : received: {"type":"set","key":"person","value":{"name":"Elon Musk","car":{"model":"Tesla Roadster","year":"2018"},"rocket":{"name":"Falcon 9","launches":"87"}}}
-pool-1-thread-2 : sent: {"response":"OK"}
-
-pool-1-thread-3 : received: {"type":"set","key":["person","rocket","launches"],"value":"107 times, with 105 full mission successes"}
-pool-1-thread-3 : sent: {"response":"OK"}
-
-pool-1-thread-3 : received: {"type":"get","key":["person","rocket"]}
-pool-1-thread-3 : sent: {"response":"OK","value":{"name":"Falcon 9","launches":"107 times, with 105 full mission successes"}}
-
-pool-1-thread-4 : received: {"type":"delete","key":["person","rocket"]}
-pool-1-thread-4 : sent: {"response":"OK"}
-
-pool-1-thread-4 : received: {"type":"get","key":"person"}
-pool-1-thread-4 : sent: {"response":"OK","value":{"name":"Elon Musk","car":{"model":"Tesla Roadster","year":"2018"}}}
-
-pool-1-thread-4 : received: {"type":"delete","key":"person"}
-pool-1-thread-4 : sent: {"response":"OK"}
-
-pool-1-thread-4 : received: {"type":"get","key":"person"}
-pool-1-thread-4 : sent: {"response":"ERROR","reason":"No such key"}
-
-pool-1-thread-4 : received: {"type":"exit"}
-pool-1-thread-4 : sent: {"response":"OK"}
-
-Process finished with exit code 0
+![image](https://user-images.githubusercontent.com/80157748/170810040-20ced70f-2a8a-4332-a110-1022e17caf5a.png)
 
