@@ -17,5 +17,3 @@ Accepted client arguments:
 
 ![image](https://user-images.githubusercontent.com/80157748/170810054-60230ed9-5e87-4dbd-ba1b-e04a8c9029a4.png)
 
-![image](https://user-images.githubusercontent.com/80157748/170810040-20ced70f-2a8a-4332-a110-1022e17caf5a.png)
-
