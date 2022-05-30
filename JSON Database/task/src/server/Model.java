@@ -1,5 +1,6 @@
 package server;
 
+import client.reguests.fromFile.Value;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
@@ -18,6 +19,7 @@ public class Model {
     HashMap<String, String> data = new HashMap<>();
 
     public  void setList(String index, String text) throws IOException {
+        System.out.println("flow");
         //get hashmap from Json file
         HashMap data = getData();
         //add object to hashmap
@@ -25,6 +27,18 @@ public class Model {
         //send hashmap to Json file
         setData(data);
     }
+
+
+
+    public  void setList(String index, server.requests.Value text) throws IOException {
+        //get hashmap from Json file
+        HashMap data = getData();
+        //add object to hashmap
+        data.put(index, text);
+        //send hashmap to Json file
+        setData(data);
+    }
+
     public  void deleteList(String index) throws IOException {
         //get hashmap from Json file
         //getData(index, data);
