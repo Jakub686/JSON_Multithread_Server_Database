@@ -16,10 +16,9 @@ public class Model {
 
     private static String PATH ="D:\\java examples\\JSON Database\\JSON Database\\task\\src\\server\\data\\db.json";
     ObjectMapper mapper = new ObjectMapper();
-    HashMap<String, String> data = new HashMap<>();
+    HashMap<String, Object> data = new HashMap<>();
 
     public  void setList(String index, String text) throws IOException {
-        System.out.println("flow");
         //get hashmap from Json file
         HashMap data = getData();
         //add object to hashmap
@@ -49,16 +48,18 @@ public class Model {
         setData(data);
     }
     //get
-    public  String getList(String index) throws IOException {
+    public  Object getList(String index) throws IOException {
         //get hashmap from Json file
-
         data = getData();
+        System.out.println(data);
         return data.get(index);
     }
 
     //get hashmap from Json file
     public HashMap getData() throws IOException{
-        return data = mapper.readValue(new File(PATH), new TypeReference<HashMap<String, String>>() {});
+
+
+        return data = mapper.readValue(new File(PATH), new TypeReference<HashMap<String, Object>>() {});
     }
     //send hashmap to Json file
     public void setData(HashMap data) throws IOException{

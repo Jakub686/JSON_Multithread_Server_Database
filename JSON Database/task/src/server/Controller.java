@@ -31,7 +31,7 @@ public class Controller {
 
                 } else {
                     serverRespond.response = view.showOk();
-                    serverRespond.value = view.show(model.getList(input.getKey()));
+                    serverRespond.value = view.show(String.valueOf(model.getList(input.getKey())));
                 }
             } catch (IOException e) {
                 serverRespond.response = view.showError();
@@ -76,14 +76,14 @@ public class Controller {
         //System.out.println(input);
         if (input.getType().equals("get")) {
             try {
-                System.out.println(model.getList(input.getKey()));
+
                 if (model.getList(input.getKey()) == null) {
                     serverRespond.response = view.showError();
                     serverRespond.reason = view.showNoSuchKey();
 
                 } else {
                     serverRespond.response = view.showOk();
-                    serverRespond.value = view.show(model.getList(input.getKey()));
+                    serverRespond.value = view.show(String.valueOf(model.getList(input.getKey())));
                 }
             } catch (IOException e) {
                 serverRespond.response = view.showError();
