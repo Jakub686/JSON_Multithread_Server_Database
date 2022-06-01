@@ -24,6 +24,7 @@ public class Controller {
         if (input.getType().equals("get")) {
 
             try {
+
                 if (model.getList(input.getKey()) == null) {
                     serverRespond.response = view.showError();
                     serverRespond.reason = view.showNoSuchKey();
@@ -74,8 +75,8 @@ public class Controller {
         //TODO Request from file and from console
         //System.out.println(input);
         if (input.getType().equals("get")) {
-
             try {
+                System.out.println(model.getList(input.getKey()));
                 if (model.getList(input.getKey()) == null) {
                     serverRespond.response = view.showError();
                     serverRespond.reason = view.showNoSuchKey();

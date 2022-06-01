@@ -50,15 +50,16 @@ public class Server implements Runnable {
                     RequestPerson requestPerson = new RequestPerson();
                     RequestString requestString = new RequestString();
                     //System.out.println("flow");
-                    if(jsonRequest.contains(" \"key\":\"person\"")){
-                        System.out.println("flow");
-                        requestPerson = new Gson().fromJson(jsonRequest, RequestPerson.class);
+                    if(jsonRequest.contains("\"key\":\"person\"")){
+                        clientRequest = new Gson().fromJson(jsonRequest, ClientRequest.class);
+
                         requestPerson.setType(clientRequest.getType());
                         requestPerson.setKey(clientRequest.getKey());
                         requestPerson.setValue(clientRequest.getValue());
+                        System.out.println(requestPerson);
                         serverRespond = new Controller(model, view).run(requestPerson);
                     }
-                    if(!jsonRequest.contains(" \"key\":\"person\"")){
+                    if(!jsonRequest.contains("\"key\":\"person\"")){
                         requestString = new Gson().fromJson(jsonRequest, RequestString.class);
 //                        requestString.setType(clientRequest.getType());
 //                        System.out.println(clientRequest.getType());
@@ -66,7 +67,6 @@ public class Server implements Runnable {
 //                        requestString.setValue(clientRequest.getValue().toString());
                         //System.out.println(requestString);
                         serverRespond = new Controller(model, view).run(requestString);
-
                     }
 
 

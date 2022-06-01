@@ -45,6 +45,7 @@ public class Main {
                 //set get delete
                 if (jArgs.file == null) {
                     jsonRequest = createRequestFromConsole.create(jArgs.type, jArgs.key, jArgs.value);
+
                 }
                 output.writeUTF(jsonRequest); // sending message to the server
                 System.out.println("Sent: " + jsonRequest);
